@@ -37,3 +37,17 @@ The explicit pytest setting avoids environment-installed plugins that require sa
 
 All internal calculations use SI units. Configuration keys encode their units where practical, and every exported plot/table must label units explicitly.
 
+## MATLAB and Simulink
+
+The `matlab/` directory provides an independent MATLAB R2022b+ implementation that reads the same JSON configurations and track definitions as Python:
+
+```matlab
+cd matlab
+results = run_project();
+run_parity_tests();
+modelPath = build_simulink_demo();
+```
+
+`build_simulink_demo` programmatically creates `results/simulink/F1WingAeroDemo.slx`. The model includes an angle command, actuator **Rate Limiter**, nonlinear aerodynamic **MATLAB Function**, tractive/drag force balance, vehicle-speed integrator, scope, signal logging, and four workspace outputs.
+
+MATLAB and Simulink are not installed in the authoring environment, so these `.m` files are statically checked but **not runtime-tested** here. Run `run_parity_tests` in MATLAB R2022b+ to compare aerodynamic results at 0°, 10°, 18°, 25°, and 30° and the three circuit lap results against `results/parity/reference_cases.csv`.
