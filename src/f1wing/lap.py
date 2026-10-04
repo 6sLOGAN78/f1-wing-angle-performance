@@ -71,6 +71,7 @@ class LapResult:
     brake_force_n: np.ndarray
     gear: np.ndarray
     limiting_mechanism: np.ndarray
+    strategy_state: np.ndarray
 
 
 def lateral_speed_limit(
@@ -222,6 +223,7 @@ def solve_lap(track: Track, cfg: ProjectConfig, schedule: AngleSchedule) -> LapR
     elapsed, _ = _time_trace(track, speed)
     angles = _angle_profile(schedule, track, speed, longitudinal_accel, elapsed, cfg)
     local_limits = _local_limits(track, angles, cfg)
+    limit_angles = angles.copy()
     speed = np.maximum(np.minimum(speed, local_limits), cfg.solver.minimum_speed_mps)
 
     converged = False
@@ -232,7 +234,9 @@ def solve_lap(track: Track, cfg: ProjectConfig, schedule: AngleSchedule) -> LapR
         next_speed = np.roll(speed, -1)
         longitudinal_accel = (next_speed**2 - speed**2) / (2.0 * track.ds_m)
         angles = _angle_profile(schedule, track, speed, longitudinal_accel, elapsed, cfg)
-        local_limits = _local_limits(track, angles, cfg)
+        if not np.array_equal(angles, limit_angles):
+            local_limits = _local_limits(track, angles, cfg)
+            limit_angles = angles.copy()
         speed = np.minimum(speed, local_limits)
 
         for index in range(n):
@@ -318,7 +322,8 @@ def solve_lap(track: Track, cfg: ProjectConfig, schedule: AngleSchedule) -> LapR
     next_speed = np.roll(speed, -1)
     longitudinal_accel = (next_speed**2 - speed**2) / (2.0 * track.ds_m)
     angles = _angle_profile(schedule, track, speed, longitudinal_accel, elapsed, cfg)
-    local_limits = _local_limits(track, angles, cfg)
+    if not np.array_equal(angles, limit_angles):
+        local_limits = _local_limits(track, angles, cfg)
 
     lateral_force = cfg.vehicle.mass_kg * speed**2 * np.abs(track.curvature_1pm)
     tractive_force = np.zeros(n)
@@ -360,6 +365,15 @@ def solve_lap(track: Track, cfg: ProjectConfig, schedule: AngleSchedule) -> LapR
 
     lap_time = float(np.sum(segment_time))
     time_at_full = float(np.sum(segment_time[full_throttle]))
+    if hasattr(schedule, "state_profile"):
+        strategy_state = np.asarray(
+            schedule.state_profile(track, angles, cfg),
+            dtype=object,
+        )
+        if strategy_state.shape != speed.shape:
+            raise ValueError("strategy state profile must match track station count")
+    else:
+        strategy_state = np.full(n, "fixed", dtype=object)
     return LapResult(
         track_name=track.name,
         lap_time_s=lap_time,
@@ -381,4 +395,5 @@ def solve_lap(track: Track, cfg: ProjectConfig, schedule: AngleSchedule) -> LapR
         brake_force_n=brake_force,
         gear=gears,
         limiting_mechanism=np.asarray(limiting, dtype=object),
+        strategy_state=strategy_state,
     )
