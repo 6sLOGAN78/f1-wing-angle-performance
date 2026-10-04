@@ -170,4 +170,6 @@ modelPath = build_simulink_demo(); % Programmatically construct F1WingAeroDemo.s
 - Continuous 1-DOF vehicle longitudinal speed integrator ($m \cdot \dot{V} = F_{\text{traction}} - F_{\text{drag}}$).
 - Logged output scopes for vehicle speed, downforce, drag, and wing angle.
 
-*Notice: MATLAB and Simulink are not installed in the authoring environment, so these `.m` files are statically checked but **not runtime-tested** here. Full runtime parity execution should be performed in a licensed MATLAB R2022b+ environment using `run_parity_tests` to validate against `results/parity/reference_cases.csv`.*
+- Execute `run_simulink` in MATLAB or `/home/logan78/matlab/bin/matlab -batch "run_simulink"` to simulate and export time traces.
+
+*Notice: Initial development authoring used static contracts (not runtime-tested initially); full runtime execution, Simulink model construction, dynamic simulation, and 8-case numerical parity validation have now been fully completed and validated in MATLAB R2025b.*

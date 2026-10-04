@@ -6,7 +6,7 @@ if nargin < 1 || strlength(string(outputDir)) == 0
     outputDir = fullfile(projectRoot, 'results', 'simulink');
 end
 outputDir = string(outputDir);
-if ~license('test', 'Simulink') || exist('new_system', 'file') ~= 2
+if ~license('test', 'Simulink') || isempty(which('new_system'))
     fprintf(['Simulink is not available. Install/activate Simulink, then run ' ...
         'build_simulink_demo again.\n']);
     modelPath = "";
@@ -44,7 +44,9 @@ aeroCode = sprintf([ ...
     'cl=2.4+clw*Aw/A; cd=0.78+cdw*Aw/A; q=0.5*rho*max(v_mps,0)^2;\n' ...
     'downforce_n=q*A*cl; drag_n=q*A*cd;\n' ...
     'end']);
-set_param(modelName + "/MATLAB Function Aero", 'Script', aeroCode);
+s = sfroot;
+chart = s.find('Path', char(modelName + "/MATLAB Function Aero"), '-isa', 'Stateflow.EMChart');
+chart.Script = aeroCode;
 add_block('simulink/Math Operations/Sum', modelName + "/Net Force", ...
     'Inputs', '+-', 'Position', [560 70 590 125]);
 add_block('simulink/Math Operations/Gain', modelName + "/Inverse Mass", ...
