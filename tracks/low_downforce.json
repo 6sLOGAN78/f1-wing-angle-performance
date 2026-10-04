@@ -4,14 +4,13 @@
   "closed": true,
   "segments": [
     {"length_m": 1200, "curvature_start_1pm": 0.0, "curvature_end_1pm": 0.0, "gradient_percent": 0.2, "aero_eligible": true, "speed_limit_kph": null},
-    {"length_m": 360, "curvature_start_1pm": 0.0033, "curvature_end_1pm": 0.0033, "gradient_percent": 0.0, "aero_eligible": false, "speed_limit_kph": null},
+    {"length_m": 360, "curvature_start_1pm": 0.0080, "curvature_end_1pm": 0.0080, "gradient_percent": 0.0, "aero_eligible": false, "speed_limit_kph": null},
     {"length_m": 950, "curvature_start_1pm": 0.0, "curvature_end_1pm": 0.0, "gradient_percent": -0.4, "aero_eligible": true, "speed_limit_kph": null},
-    {"length_m": 240, "curvature_start_1pm": -0.0067, "curvature_end_1pm": -0.0067, "gradient_percent": -0.2, "aero_eligible": false, "speed_limit_kph": null},
+    {"length_m": 240, "curvature_start_1pm": -0.0120, "curvature_end_1pm": -0.0120, "gradient_percent": -0.2, "aero_eligible": false, "speed_limit_kph": null},
     {"length_m": 780, "curvature_start_1pm": 0.0, "curvature_end_1pm": 0.0, "gradient_percent": 0.1, "aero_eligible": true, "speed_limit_kph": null},
-    {"length_m": 420, "curvature_start_1pm": 0.0025, "curvature_end_1pm": 0.0040, "gradient_percent": 0.5, "aero_eligible": false, "speed_limit_kph": null},
+    {"length_m": 420, "curvature_start_1pm": 0.0060, "curvature_end_1pm": 0.0080, "gradient_percent": 0.5, "aero_eligible": false, "speed_limit_kph": null},
     {"length_m": 1050, "curvature_start_1pm": 0.0, "curvature_end_1pm": 0.0, "gradient_percent": -0.1, "aero_eligible": true, "speed_limit_kph": null},
-    {"length_m": 300, "curvature_start_1pm": -0.0050, "curvature_end_1pm": -0.0050, "gradient_percent": -0.3, "aero_eligible": false, "speed_limit_kph": null},
+    {"length_m": 300, "curvature_start_1pm": -0.0090, "curvature_end_1pm": -0.0090, "gradient_percent": -0.3, "aero_eligible": false, "speed_limit_kph": null},
     {"length_m": 520, "curvature_start_1pm": 0.0, "curvature_end_1pm": 0.0, "gradient_percent": 0.0, "aero_eligible": true, "speed_limit_kph": null}
   ]
 }
-
