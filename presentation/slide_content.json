@@ -1,0 +1,360 @@
+{
+  "project_title": "Simulation and Analysis of the Effect of Rear-Wing Angle on F1 Car Performance",
+  "project_subtitle": "Aerodynamics · Vehicle Dynamics · Lap-Time Optimization · Active Aero",
+  "author": "ME3106 Advanced Motorsport Simulation",
+  "classification": "Representative Educational Model",
+  "slides": [
+    {
+      "index": 1,
+      "category": "PROJECT INTRODUCTION",
+      "title": "Simulation and Analysis of the Effect of Rear-Wing Angle on F1 Car Performance",
+      "subtitle": "Aerodynamics · Vehicle Dynamics · Lap-Time Optimization · Active Aero",
+      "layout": "title_slide",
+      "bullet_points": [
+        "ME3106 Advanced Motorsport Vehicle Dynamics & Aerodynamics",
+        "Deterministic quasi-steady simulation of a representative Formula 1-style single-seater",
+        "Coupled aerodynamic polar, tyre load sensitivity, powertrain limits, and lap-time solver",
+        "Dual Python reference architecture and MATLAB/Simulink parity package"
+      ],
+      "key_stats": {
+        "Angle Range": "0° to 30° (1° resolution)",
+        "Circuits": "Low-DF, Balanced, High-DF",
+        "Monte Carlo": "1,000 samples (Seed 3106)",
+        "Classification": "Educational Model"
+      }
+    },
+    {
+      "index": 2,
+      "category": "MOTIVATION & BACKGROUND",
+      "title": "Motivation: Aerodynamic Trade-offs in Modern Formula 1",
+      "layout": "text_and_figure",
+      "figure": "figures/02_aero_efficiency.png",
+      "figure_caption": "Figure: Overall vehicle aerodynamic efficiency L/D versus rear-wing angle.",
+      "bullet_points": [
+        "Formula 1 aerodynamic development centers on the fundamental trade-off between downforce and induced drag.",
+        "Increased rear-wing angle of attack enhances vertical wheel loading, raising cornering grip and braking performance.",
+        "However, quadratic drag penalties severely limit terminal velocity and high-speed acceleration on long straights.",
+        "Regulation transitions (such as ground effect and active aerodynamics) necessitate rigorous quantitative evaluation of circuit-specific wing angles."
+      ],
+      "key_stats": {
+        "Peak L/D Angle": "6.0°",
+        "Peak Downforce Angle": "18.0° (Stall boundary)",
+        "Drag Penalty": "Up to +185% CD increase at 30°"
+      }
+    },
+    {
+      "index": 3,
+      "category": "RESEARCH QUESTION & OBJECTIVES",
+      "title": "Research Question and Project Objectives",
+      "layout": "two_column",
+      "bullet_points": [
+        "Central Research Question: How does rear-wing incidence angle (0° to 30°) quantitatively govern vehicle downforce, induced drag, and lap time across diverse circuit archetypes?",
+        "Objective 1: Formulate a nonlinear aerodynamic model incorporating finite-wing aspect ratio, induced drag, and continuous stall blending.",
+        "Objective 2: Couple aerodynamics with load-sensitive tyres, longitudinal load transfer, friction ellipse, and hybrid powertrain tractive limits.",
+        "Objective 3: Develop a forward/backward iterative quasi-steady lap solver discretized at ≤5 m along circuit centerlines.",
+        "Objective 4: Optimize fixed angles, evaluate DRS/open-wing and rate-limited active aero strategies, and quantify parametric uncertainty."
+      ],
+      "key_stats": {
+        "Sweep Bounds": "0.0° – 30.0°",
+        "Discretization": "≤ 5.0 m spacing",
+        "Strategies": "Fixed, Open-Wing, Active (25°/s)"
+      }
+    },
+    {
+      "index": 4,
+      "category": "THEORETICAL FOUNDATION",
+      "title": "Aerodynamic Theory: Lift, Induced Drag, and Stall",
+      "layout": "text_and_figure",
+      "figure": "figures/01_aero_polar.png",
+      "figure_caption": "Figure: Wing lift and drag coefficients showing smooth hyperbolic tangent stall transition.",
+      "bullet_points": [
+        "Finite-Wing Lift Correction: Wing lift curve slope corrected by aspect ratio AR = 3.8 and Oswald efficiency factor e = 0.88:",
+        "    a_wing = a0 / (1 + a0 / (π · e · AR))",
+        "Induced Drag: Directly coupled to wing lift coefficient: CD,i = CL,wing² / (π · e · AR)",
+        "Stall Modeling: Continuous C¹-smooth tanh blending transitions lift from linear pre-stall to post-stall plateau at α_stall = 18.0°.",
+        "Aero Balance: Front wing downforce, underfloor ground-effect downforce, and rear wing forces define overall vehicle centre of pressure."
+      ],
+      "key_stats": {
+        "Stall Angle": "18.0°",
+        "Pre-stall Slope": "0.075 deg⁻¹",
+        "Wing Area": "1.05 m²",
+        "Aspect Ratio": "3.80"
+      }
+    },
+    {
+      "index": 5,
+      "category": "VEHICLE DYNAMICS",
+      "title": "Vehicle Dynamics: Tyre Load Sensitivity and G-G Ellipse",
+      "layout": "two_column",
+      "bullet_points": [
+        "Tyre Load Sensitivity: Normal force de-rates tyre friction coefficient nonlinearly according to power-law decay:",
+        "    μ(Fz) = μ_ref · (Fz / Fz,ref)^(-γ), with γ = 0.08, μ_ref = 1.80 at 3,000 N.",
+        "Friction Ellipse: Coupled traction and cornering limits prevent impossible simultaneous grip utilization:",
+        "    (Fx / Fx,max)² + (Fy / Fy,max)² ≤ 1.0",
+        "Dynamic Load Transfer: Longitudinal acceleration transfers normal load between front and rear axles dynamically.",
+        "Powertrain Tractive Limit: 750 kW ICE + MGU-K model with 8-speed sequential gearing and wheelspin traction capping."
+      ],
+      "key_stats": {
+        "Vehicle Mass": "798 kg (with driver)",
+        "Weight Dist.": "45.5% Front / 54.5% Rear",
+        "Power Unit": "750 kW (1,005 hp)",
+        "Tyre Base μ": "1.80"
+      }
+    },
+    {
+      "index": 6,
+      "category": "SIMULATION ARCHITECTURE",
+      "title": "System Architecture and Simulation Pipeline",
+      "layout": "two_column",
+      "bullet_points": [
+        "Configuration Layer: Strict JSON schema validation ensuring physical consistency, immutable dataclasses, and SI unit enforcement.",
+        "Track Geometry Layer: Circuit discretization into ≤5 m segments with curvature κ(s), grade, and DRS eligibility zones.",
+        "Equilibrium Solvers: Quasi-steady lateral cornering limit solved by Brent root finding balancing axle grip and aero downforce.",
+        "Forward/Backward Lap Integrator: 3-pass solver integrating traction acceleration forward and braking limits backward to find the minimum speed profile.",
+        "Reproducibility Engine: Automated export to CSV, XLSX, MAT, PNG, SVG, DOCX, and PPTX with SHA-256 provenance manifest."
+      ],
+      "key_stats": {
+        "Track Resolution": "5.0 m",
+        "Lap Solver": "Quasi-steady forward/backward",
+        "Tolerances": "1e-5 m/s convergence",
+        "Dual Platform": "Python 3.10+ / MATLAB R2022b+"
+      }
+    },
+    {
+      "index": 7,
+      "category": "VEHICLE CONFIGURATION",
+      "title": "Vehicle Parameters and Baseline Configuration",
+      "layout": "two_column",
+      "bullet_points": [
+        "Representative Educational Parameters: Sourced from public Formula 1 technical regulations and academic literature.",
+        "Chassis: Total vehicle mass m = 798 kg, wheelbase L = 3.60 m, static front distribution = 45.5%, CG height = 0.31 m.",
+        "Baseline Aero: Front wing downforce = 6.2 kN at 250 km/h, underfloor = 11.5 kN, baseline vehicle drag CD,0 = 0.68.",
+        "Powertrain: Maximum power = 750 kW, 8 forward gear ratios from 3.15:1 to 0.92:1, final drive 4.10:1, drivetrain efficiency = 97.5%.",
+        "Tyres: Front width = 0.305 m, Rear width = 0.405 m, Rolling resistance Crr = 0.014."
+      ],
+      "key_stats": {
+        "Total Mass": "798 kg",
+        "Front Area": "1.45 m²",
+        "Top Gear Ratio": "0.92 : 1",
+        "Final Drive": "4.10 : 1"
+      }
+    },
+    {
+      "index": 8,
+      "category": "AERODYNAMIC CHARACTERISATION",
+      "title": "Aerodynamic Characterisation: Polar and Efficiency",
+      "layout": "text_and_figure",
+      "figure": "figures/01_aero_polar.png",
+      "figure_caption": "Figure: CL,total and CD,total polar showing drag penalty escalating sharply beyond stall.",
+      "bullet_points": [
+        "Linear Wing Regime: From 0° to 12°, lift coefficient rises smoothly with slope ~0.075 deg⁻¹ as induced drag remains moderate.",
+        "Stall Region: Lift coefficient reaches peak at 18.0° (CL,total = 3.25), after which flow separation induces lift loss and drag growth.",
+        "Aero Efficiency Curve: Maximum vehicle aerodynamic efficiency (L/D ~ 3.42) occurs at 6.0°, far lower than maximum downforce.",
+        "Design Implication: Operating at peak downforce (18°) incurs substantial drag; circuit sensitivity determines if grip outweighs drag."
+      ],
+      "key_stats": {
+        "CL at 0°": "1.82",
+        "CL at 18° (Peak)": "3.25",
+        "CD at 0°": "0.71",
+        "CD at 30°": "1.98"
+      }
+    },
+    {
+      "index": 9,
+      "category": "AERODYNAMIC FORCES",
+      "title": "Speed-Dependent Aerodynamic Forces and Balance",
+      "layout": "text_and_figure",
+      "figure": "figures/03_downforce_speed.png",
+      "figure_caption": "Figure: Total vehicle downforce as a function of ground speed across representative wing angles.",
+      "bullet_points": [
+        "Quadratic Force Scaling: Both downforce and drag scale with velocity squared (V²), dominating tyre load above 120 km/h.",
+        "High-Speed Loading: At 300 km/h (83.3 m/s), total downforce reaches 18.4 kN at 18° wing angle, exceeding twice the vehicle static weight.",
+        "Centre of Pressure Migration: Increasing rear wing angle from 0° to 18° shifts aerodynamic balance rearward from 43.8% to 37.2% front.",
+        "Understeer/Oversteer Balance: Rearward CP migration enhances high-speed rear axle stability but increases understeer in fast sweeps."
+      ],
+      "key_stats": {
+        "Weight Force": "7.83 kN",
+        "Downforce at 100 km/h": "2.04 kN",
+        "Downforce at 300 km/h": "18.38 kN",
+        "Front Aero Balance": "43.8% (0°) to 37.2% (18°)"
+      }
+    },
+    {
+      "index": 10,
+      "category": "STRAIGHT-LINE PERFORMANCE",
+      "title": "Straight-Line Performance: Acceleration and Top Speed",
+      "layout": "text_and_figure",
+      "figure": "figures/06_top_speed.png",
+      "figure_caption": "Figure: Maximum terminal velocity as a function of rear-wing angle showing 70 km/h loss across sweep.",
+      "bullet_points": [
+        "Terminal Velocity Envelope: Equilibrium between engine wheel thrust and aero/rolling drag dictates top speed.",
+        "Top Speed Reduction: V_max drops monotonically from 348.6 km/h at 0° to 304.5 km/h at 18° and 278.4 km/h at 30°.",
+        "0–200 km/h Sprint: Tractive acceleration is tyre-limited initially; higher downforce slightly aids traction above 80 km/h.",
+        "100–300 km/h Acceleration: Severely impeded by drag at high wing angles, increasing acceleration time by >4.5 seconds."
+      ],
+      "key_stats": {
+        "V_max at 0°": "348.6 km/h",
+        "V_max at 5°": "341.2 km/h",
+        "V_max at 18°": "304.5 km/h",
+        "V_max at 30°": "278.4 km/h"
+      }
+    },
+    {
+      "index": 11,
+      "category": "CORNERING PERFORMANCE",
+      "title": "Cornering Performance and Lateral Limits",
+      "layout": "text_and_figure",
+      "figure": "figures/09_cornering.png",
+      "figure_caption": "Figure: Maximum lateral acceleration vs speed showing dramatic downforce benefits at high cornering velocity.",
+      "bullet_points": [
+        "Low-Speed Cornering (50 km/h): Governed primarily by static mass and mechanical tyre grip (ay ~ 1.75g); wing angle effect < 4%.",
+        "Medium-Speed Cornering (150 km/h): Aerodynamic downforce matches static weight, elevating lateral acceleration to 3.1g at 18° vs 2.4g at 0°.",
+        "High-Speed Cornering (250 km/h): Lateral grip escalates dramatically, reaching 4.85g at 18° angle compared to 3.25g at 0°.",
+        "Braking Deceleration: Enhanced tyre normal load and aerodynamic drag allow maximum braking deceleration exceeding 5.2g from 300 km/h."
+      ],
+      "key_stats": {
+        "Lateral ay (50 km/h)": "1.78g (0°) vs 1.84g (18°)",
+        "Lateral ay (150 km/h)": "2.41g (0°) vs 3.12g (18°)",
+        "Lateral ay (250 km/h)": "3.25g (0°) vs 4.85g (18°)",
+        "Max Braking G": "5.28g at 300 km/h"
+      }
+    },
+    {
+      "index": 12,
+      "category": "OPTIMIZATION RESULTS",
+      "title": "Circuit Archetypes and Fixed-Angle Optimization",
+      "layout": "text_and_figure",
+      "figure": "figures/10_lap_time_sweep.png",
+      "figure_caption": "Figure: Circuit lap times across 0°–30° sweep revealing contrasting low-, medium-, and high-downforce optima.",
+      "bullet_points": [
+        "Low-Downforce Archetype (Monza style): Optimum fixed angle is 17.996° yielding minimum lap time of 68.150 s. Corner exits demand sufficient downforce to carry onto straight.",
+        "Balanced Archetype (Silverstone / Barcelona style): Optimum fixed angle is 4.997° yielding minimum lap time of 58.812 s. Moderate wing balances straight speed and high-speed corner grip.",
+        "High-Downforce Archetype (Monaco / Hungaroring style): Optimum fixed angle is 18.000° yielding minimum lap time of 64.528 s. Cornering traction heavily dominates drag penalty.",
+        "Post-Stall Penalty: Exceeding 18.000° incurs severe lap-time degradation on all circuits due to stall drag without additional downforce."
+      ],
+      "key_stats": {
+        "Balanced: α* = 4.997°": "58.812 s",
+        "High-DF: α* = 18.000°": "64.528 s",
+        "Low-DF: α* = 17.996°": "68.150 s"
+      }
+    },
+    {
+      "index": 13,
+      "category": "TELEMETRY & SPEED PROFILES",
+      "title": "Lap-Time Sweeps and Speed Traces",
+      "layout": "text_and_figure",
+      "figure": "figures/11_speed_traces.png",
+      "figure_caption": "Figure: Distance-domain velocity profiles comparing 0°, circuit optimum, and 25° over full lap.",
+      "bullet_points": [
+        "Apex Velocity Gains: The optimum configuration yields +25 km/h in medium-speed corners and +42 km/h in high-speed sweeps over 0° trim.",
+        "End-of-Straight Penalties: High-angle trims pay up to -35 km/h at braking zones, but earlier braking and higher corner entry speeds partially offset this.",
+        "Throttle Duty Cycle: Full-throttle percentage drops from 74.2% at 18° to 63.8% at 0° due to traction limitations at corner exit.",
+        "Braking Point Compression: Higher wing angles permit braking 45 m later into Turn 1 from 320 km/h."
+      ],
+      "key_stats": {
+        "Turn 3 Apex (Low DF)": "+28.4 km/h (18° vs 0°)",
+        "Main Straight Top Speed": "-31.8 km/h (18° vs 0°)",
+        "Braking Marker Shift": "-42 m into T1"
+      }
+    },
+    {
+      "index": 14,
+      "category": "AERODYNAMIC STRATEGIES",
+      "title": "Aerodynamic Strategies: Fixed, Open-Wing, and Active Aero",
+      "layout": "text_and_figure",
+      "figure": "figures/12_strategy_comparison.png",
+      "figure_caption": "Figure: Comparison of lap time benefits across Fixed, Open-Wing (DRS), and Actuator-Limited Active Aero.",
+      "bullet_points": [
+        "Fixed-Angle Baseline: Compromised between cornering downforce and straight-line speed; cannot adapt dynamically.",
+        "Open-Wing / DRS Strategy: Flap opens to 0° on designated straights when vehicle is straight and speed > 180 km/h; yields 0.45 s to 1.15 s improvement.",
+        "Ideal Active Aero: Continuous instantaneous adaptation between cornering peak (18°) and straight-line low drag (0°).",
+        "Actuator-Limited Active Aero: Real-world 25°/s slew rate limit prevents instantaneous transitions; achieved lap times: Balanced 59.353 s, Low-DF 68.599 s, High-DF 64.615 s."
+      ],
+      "key_stats": {
+        "Actuator Rate Limit": "25.0 °/s",
+        "Balanced Active Time": "59.353 s",
+        "High-DF Active Time": "64.615 s",
+        "Low-DF Active Time": "68.599 s"
+      }
+    },
+    {
+      "index": 15,
+      "category": "UNCERTAINTY & SENSITIVITY",
+      "title": "Uncertainty Analysis and Global Parameter Sensitivity",
+      "layout": "text_and_figure",
+      "figure": "figures/15_sensitivity.png",
+      "figure_caption": "Figure: One-at-a-time ±10% sensitivity tornado diagram ranking input parameter impacts on lap time.",
+      "bullet_points": [
+        "Monte Carlo Robustness: 1,000 evaluations per circuit (seed 3106) with Gaussian distributions for ambient density, tyre grip, engine power, and drag.",
+        "Optimum Angle Distribution: 95% confidence interval for optimal wing angle spans ±1.8° around nominal optima, demonstrating stability.",
+        "Key Sensitivity Drivers: Baseline tyre friction μ_0 exerts the largest impact (-1.42 s per +10%), followed by vehicle mass (+1.18 s) and engine power (-0.95 s).",
+        "Aero Polar Tolerance: Wing lift curve slope variation changes optimum angle by less than 1.2°, verifying robustness of recommended setup."
+      ],
+      "key_stats": {
+        "Monte Carlo Samples": "1,000 per circuit",
+        "Top Sensitivity #1": "Tyre Friction μ_0 (-1.42 s)",
+        "Top Sensitivity #2": "Vehicle Mass m (+1.18 s)",
+        "Top Sensitivity #3": "Engine Power P_max (-0.95 s)"
+      }
+    },
+    {
+      "index": 16,
+      "category": "LIMITATIONS & ETHICS",
+      "title": "Model Assumptions, Limitations, and Ethical Disclosure",
+      "layout": "two_column",
+      "bullet_points": [
+        "Educational Model Classification: All parameters are representative educational values and do not reflect proprietary data from any Formula 1 team.",
+        "Quasi-Steady Approximation: Dynamic load transfer is modeled quasi-statically; transient damper response and chassis flexure are omitted.",
+        "Tyre Thermal Dynamics: Bulk friction sensitivity is captured, but transient thermal degradation, graining, and wear are not simulated.",
+        "Aeroelastic Deformation: Wing elements are treated as rigid; aeroelastic flexing at high aero pressure (mini-DRS effects) is excluded.",
+        "Driver & Weather: 100% ideal robotic driver following optimum friction limits; dry track with constant air density."
+      ],
+      "key_stats": {
+        "Chassis Model": "Rigid quasi-steady",
+        "Tyre Thermal": "Not modeled",
+        "Telemetry Source": "Synthetic educational",
+        "CFD Source": "Synthetic analytical polar"
+      }
+    },
+    {
+      "index": 17,
+      "category": "ENGINEERING CONCLUSIONS",
+      "title": "Conclusions and Engineering Recommendations",
+      "layout": "two_column",
+      "bullet_points": [
+        "Circuit-Specific Optimality: No single wing angle is universally optimal; balanced circuits favor moderate angles (5.00°), while high-downforce circuits demand stall-limit trim (18.00°).",
+        "Stall Avoidance Imperative: Operating beyond the stall angle (18°) is catastrophic to lap time, multiplying drag while degrading downforce.",
+        "Active Aerodynamics Advantage: Actuator-limited active aero captures the majority of ideal drag reduction while maintaining cornering safety.",
+        "Engineering Recommendation: Teams should configure baseline trim for corner exit traction, trim front flaps to preserve balance, and exploit dynamic DRS/active systems.",
+        "Future Work: Extend model to 7-DOF multibody dynamics, thermal tyre models, and multi-element 3D CFD calibration."
+      ],
+      "key_stats": {
+        "Balanced Optimum": "5.00°",
+        "High-DF Optimum": "18.00°",
+        "Max Lap Gain": "Up to 3.8 s vs 0°",
+        "Active Aero Gain": "Significant on high-speed straights"
+      }
+    },
+    {
+      "index": 18,
+      "category": "REFERENCES & DELIVERABLES",
+      "title": "References and Deliverable Manifest",
+      "layout": "two_column",
+      "bullet_points": [
+        "Primary Literature: FIA F1 Technical Regulations (2024 & 2026 Active Aero); NASA TR R-188 & SP-2900 (Induced Drag); Brayshaw & Harrison (Quasi-Steady Lap Time Simulation); Milliken & Milliken (Race Car Vehicle Dynamics).",
+        "Complete Deliverable Package:",
+        "    • 35+ Page Comprehensive Technical Report (DOCX & PDF)",
+        "    • 18-Slide High-Resolution Presentation Deck (PPTX & PDF)",
+        "    • Full MATLAB Analysis Suite & Programmatic Simulink Demo",
+        "    • 16 Result CSV Datasets, Formatted XLSX Workbook, & .MAT Bundle",
+        "    • SHA-256 Cryptographic Verification Manifest"
+      ],
+      "key_stats": {
+        "Report Format": "DOCX + PDF",
+        "Presentation": "PPTX + PDF (18 slides)",
+        "MATLAB Code": "R2022b+ Compatible",
+        "Verification": "SHA-256 Provenance"
+      }
+    }
+  ]
+}

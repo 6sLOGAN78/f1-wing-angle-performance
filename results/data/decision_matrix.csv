@@ -1,0 +1,4 @@
+track,optimum_angle_deg,minimum_lap_time_s,best_discrete_angle_deg,best_discrete_lap_time_s,neighbour_sensitivity_s_per_deg,optimization_method,reference_10deg_lap_time_s,maximum_speed_kph,tractive_energy_mj,active_limited_lap_time_s,fixed_gain_vs_10deg_s,active_gain_vs_fixed_s
+low_downforce,17.9957432405,68.1503751875,18,68.1503904847,0.042364260011,integer sweep + PCHIP bounded refinement,68.3315635656,336.866773246,37.1301018438,68.5992831863,0.181188378084,-0.448907998772
+balanced,4.99675185126,58.8115603301,5,58.8115714149,0.00309175864352,integer sweep + PCHIP bounded refinement,59.0436501124,349.329410761,38.4415859737,59.3526833484,0.232089782271,-0.541123018259
+high_downforce,18,64.52767335,18,64.52767335,0.0867269766408,integer sweep + PCHIP bounded refinement,65.3848917406,334.139744854,27.3155025819,64.6148768511,0.857218390596,-0.0872035010686

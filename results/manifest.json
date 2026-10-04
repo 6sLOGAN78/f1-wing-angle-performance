@@ -1,0 +1,320 @@
+{
+  "angle_grid_deg": [
+    0.0,
+    1.0,
+    2.0,
+    3.0,
+    4.0,
+    5.0,
+    6.0,
+    7.0,
+    8.0,
+    9.0,
+    10.0,
+    11.0,
+    12.0,
+    13.0,
+    14.0,
+    15.0,
+    16.0,
+    17.0,
+    18.0,
+    19.0,
+    20.0,
+    21.0,
+    22.0,
+    23.0,
+    24.0,
+    25.0,
+    26.0,
+    27.0,
+    28.0,
+    29.0,
+    30.0
+  ],
+  "artifact_sha256": {
+    "data/F1_Wing_Angle_Results.mat": "ac2b01cab933e7481b078ba63a63b46da632338c9099c712527f237b0388babc",
+    "data/active_optimization.csv": "8f7cf1d3708d63f1f5a09422657d6d6073dbe2bd40cc9f0eb86b8efc23701e22",
+    "data/aero_balance.csv": "01b29f663784524a5043c3f307c1924647a062e1b9cc5b85c29b1ff9ab732c71",
+    "data/aero_polar.csv": "157a6d3c87efba065d762c822201a4e3b456038adaa1394611e1075cca7ae393",
+    "data/circuit_optima.csv": "67fc457726d0c55e5897c4e1f4aa59576bd63b0df5c50b847f9e7b3638bd507a",
+    "data/cornering.csv": "0b43a9a7c46bf20de5878f43153082efc077e3f57152d0d0e0fbf257b8649ed1",
+    "data/decision_matrix.csv": "f043ce81377df984d494cee9f2919a2b7cb1ab0b47ed28d95eca12a5045580a4",
+    "data/force_speed.csv": "2f0e3c6dd46f8eb0735b2c6813538b94c2c82620238741a8135ea26c14064a90",
+    "data/lap_sweeps.csv": "9d8c3ef3884b6e0cda293c7ac4b40dff33ac6f0ccc3eb458a3f0ae45a48a8cd7",
+    "data/monte_carlo_correlations.csv": "d666fa67ad14bfddf3965807914010d0b2921da429afed7e74a014df57146c57",
+    "data/monte_carlo_samples.csv": "cecf1d8e6484b100a5e10f50dbdd6f4ad43caae4d4e3facf2cbf993014b8294a",
+    "data/monte_carlo_summary.csv": "4e499890e371f90c7f882f75d12d67d3d2793582fc471dd883ac68fbcfad9007",
+    "data/parity_cases.csv": "c8043f7fe92c90ee7cd4681b16974ccc4228959d369f7d8f1d5bdc0f521bc7eb",
+    "data/sensitivity.csv": "9ee18e29211a2d6522bc21fada65491f2b308fa8cda4298e37159b6516d65866",
+    "data/speed_traces.csv": "c4c3cb77e5489d6c87e664c172164373c6c11a82fb4d4614ebd7c286c9ed333f",
+    "data/straight_line.csv": "648380e236119452b1647ce81937b848d424e0e15536b70d0a5272f53c8a8beb",
+    "data/strategy_comparison.csv": "3b1313f773bca4f22e3aef535326d7c838c79a0be85a1482d945c484b6a9f0e4",
+    "figures/01_aero_polar.png": "5cfe985cc3dd9e494003b5d866e61e9894911076fc5c523c935c3bde64f6f89f",
+    "figures/01_aero_polar.svg": "d24266c351c4c7af054a02f59847e44e318510b69c4c1e7dbf94bdcb7fef82ef",
+    "figures/02_aero_efficiency.png": "caa9f2f5d0a093bb3f9d467867d5de413ef59f1f7da074865b9469c9dd991131",
+    "figures/02_aero_efficiency.svg": "606fdbb9e15a12b2a2ce9ee41c1ec346a52c7aee25dc328b76812514f804da57",
+    "figures/03_downforce_speed.png": "c7006eff6dfd523c615f754f2a79444bf7653ae8cb381b1b84c7f65586f8beda",
+    "figures/03_downforce_speed.svg": "94f2daf5f2db305360c0d576e7b73f8219908d1372ecf2d2e8360b01420805f8",
+    "figures/04_drag_speed.png": "05a648b6df42350fa739586e7f8c75687e445ea273bfa9c664951bbb63d81e54",
+    "figures/04_drag_speed.svg": "da3aab91cd49c5fdec661c57e41cb6934ab24908b05a0bab940b4c01d151a59c",
+    "figures/05_aero_balance.png": "dc2d774bb66dc413cc6bce59bd04742615b054e0c67599be4b214640c1b38422",
+    "figures/05_aero_balance.svg": "db2676312b1176f5de2f2c54eefa2c496c1ee3f3dd88b4ee8dda1c44fe81a019",
+    "figures/06_top_speed.png": "4a2485cc32a085883e775181344bee5302f4712c8c36f9fc7c4a6be810403352",
+    "figures/06_top_speed.svg": "bd3632bc72ea1ab551f06661c563b50fc35f566a2793fb1a1b121ea5cfd1e3d2",
+    "figures/07_acceleration.png": "7f478396bfd2a582d68e39c92a71f710ced2971051302b7ed3667d834b9b592a",
+    "figures/07_acceleration.svg": "36ab8d225de9bb91d4c2db9a66f763b7e008b24406752741eee51a6a62ad617a",
+    "figures/08_braking.png": "01eba75b08d1a698bb429091de7be2378918c5f0aa704058185a6c558c746b72",
+    "figures/08_braking.svg": "04688b7ae20e858324fd8fb043b64a8b7ab2beaaf3a0a447b1e9ff8a6093d043",
+    "figures/09_cornering.png": "989d8d1ea9e6e418851bd66f13771318ed6ec9b1f8122b07685a02c8d2a0492a",
+    "figures/09_cornering.svg": "fe7007e90ea37036c1dbace340a5c1a14d079c56251f53e9c21a53c6db34f3ac",
+    "figures/10_lap_time_sweep.png": "b9415bd80786f173093b66bef274d49a034dcc3513a4ad49d9bb760c9fb5d541",
+    "figures/10_lap_time_sweep.svg": "783cf8feaf9d6c1321a77e7f94fb8a21536be734f36606b0bea2d52eabc05506",
+    "figures/11_speed_traces.png": "60bf7ec899ea9d81ed1e8ea4d68f6607d4050df52dedf7ff57f8f7f973b0f10a",
+    "figures/11_speed_traces.svg": "16a05d139364af142cd915fdd7a9799ad410b9eb025334ed8dfe429e91de5e29",
+    "figures/12_strategy_comparison.png": "b069bf94d846d65a87bc68c8027f9c52e94cbf1b494debd90783c019e04c2c34",
+    "figures/12_strategy_comparison.svg": "20211c0010e2f9f21d6a7d9888ca48794e4b17506fa694395fe04a3527a14506",
+    "figures/13_energy_strategy.png": "f389d48bd7eb439c24b6340e1c1fb2e8d308853cf838569f9d5e92d5563e7142",
+    "figures/13_energy_strategy.svg": "dd0ab2fda33dae2dbfdce629a4c93c1b3a3638d9cd8dad1fda68aaf3adab16cb",
+    "figures/14_uncertainty_optimum.png": "d3dda57d85be8e655cac2ac2c50935abfdc4df69aa7317304d4557356624ac96",
+    "figures/14_uncertainty_optimum.svg": "a23d55b09a935519794fb244195635a745b36181697d70ffde3148f57fbaedba",
+    "figures/15_sensitivity.png": "ecd6ca4d535101be1be8b4eff281aca52f58a48c1f018d44aa3236e7b36d8cb9",
+    "figures/15_sensitivity.svg": "e628ee71c0d903053e3117d092c5cd97216c34fb5fde617816a688f48e6ae936",
+    "figures/16_decision_matrix.png": "edefaefcb0d5f91c1f60f5508a4cfbd31d858154b4951e490a7fe2d4c9819992",
+    "figures/16_decision_matrix.svg": "81ec3aaade42ca6f28b6a83ae813eeaeb9589c26c23ebb43e78720aca8371027",
+    "parity/reference_cases.csv": "c8043f7fe92c90ee7cd4681b16974ccc4228959d369f7d8f1d5bdc0f521bc7eb",
+    "workbooks/F1_Wing_Angle_Results.xlsx": "d0eed1535e49be4433992f5029b273bfe8b7d286097744f1cc8379203b14eaac"
+  },
+  "figures": [
+    {
+      "caption": "Wing lift and drag coefficients, including the modeled stall transition.",
+      "id": "01_aero_polar",
+      "path": "figures/01_aero_polar.png",
+      "source_data": "data/aero_polar.csv",
+      "svg_path": "figures/01_aero_polar.svg",
+      "units": "dimensionless"
+    },
+    {
+      "caption": "Aerodynamic efficiency peaks before maximum downforce and falls through stall.",
+      "id": "02_aero_efficiency",
+      "path": "figures/02_aero_efficiency.png",
+      "source_data": "data/aero_polar.csv",
+      "svg_path": "figures/02_aero_efficiency.svg",
+      "units": "dimensionless"
+    },
+    {
+      "caption": "Downforce increases with the square of speed for selected rear-wing angles.",
+      "id": "03_downforce_speed",
+      "path": "figures/03_downforce_speed.png",
+      "source_data": "data/force_speed.csv",
+      "svg_path": "figures/03_downforce_speed.svg",
+      "units": "N"
+    },
+    {
+      "caption": "Drag penalty across wing settings for selected rear-wing angles.",
+      "id": "04_drag_speed",
+      "path": "figures/04_drag_speed.png",
+      "source_data": "data/force_speed.csv",
+      "svg_path": "figures/04_drag_speed.svg",
+      "units": "N"
+    },
+    {
+      "caption": "Front share of total aerodynamic load for selected rear-wing angles.",
+      "id": "05_aero_balance",
+      "path": "figures/05_aero_balance.png",
+      "source_data": "data/aero_balance.csv",
+      "svg_path": "figures/05_aero_balance.svg",
+      "units": "%"
+    },
+    {
+      "caption": "Power-limited top speed decreases as wing drag rises.",
+      "id": "06_top_speed",
+      "path": "figures/06_top_speed.png",
+      "source_data": "data/straight_line.csv",
+      "svg_path": "figures/06_top_speed.svg",
+      "units": "km/h"
+    },
+    {
+      "caption": "Acceleration time includes gearing, traction, rolling resistance, and aerodynamic drag.",
+      "id": "07_acceleration",
+      "path": "figures/07_acceleration.png",
+      "source_data": "data/straight_line.csv",
+      "svg_path": "figures/07_acceleration.svg",
+      "units": "s"
+    },
+    {
+      "caption": "Integrated 300\u20130 km/h braking distance with load-sensitive tyres and aero.",
+      "id": "08_braking",
+      "path": "figures/08_braking.png",
+      "source_data": "data/straight_line.csv",
+      "svg_path": "figures/08_braking.svg",
+      "units": "m"
+    },
+    {
+      "caption": "Axle-constrained maximum cornering speed for representative radii.",
+      "id": "09_cornering",
+      "path": "figures/09_cornering.png",
+      "source_data": "data/cornering.csv",
+      "svg_path": "figures/09_cornering.svg",
+      "units": "km/h"
+    },
+    {
+      "caption": "Fixed-wing lap-time sweep for low-, balanced-, and high-downforce circuits.",
+      "id": "10_lap_time_sweep",
+      "path": "figures/10_lap_time_sweep.png",
+      "source_data": "data/lap_sweeps.csv",
+      "svg_path": "figures/10_lap_time_sweep.svg",
+      "units": "s"
+    },
+    {
+      "caption": "Minimum-, optimum-, and maximum-wing speed traces on each circuit archetype.",
+      "id": "11_speed_traces",
+      "path": "figures/11_speed_traces.png",
+      "source_data": "data/speed_traces.csv",
+      "svg_path": "figures/11_speed_traces.svg",
+      "units": "km/h"
+    },
+    {
+      "caption": "Lap-time comparison of fixed, open-wing, ideal-active, and actuator-limited modes.",
+      "id": "12_strategy_comparison",
+      "path": "figures/12_strategy_comparison.png",
+      "source_data": "data/strategy_comparison.csv",
+      "svg_path": "figures/12_strategy_comparison.svg",
+      "units": "s"
+    },
+    {
+      "caption": "Integrated positive wheel work for each aerodynamic strategy.",
+      "id": "13_energy_strategy",
+      "path": "figures/13_energy_strategy.png",
+      "source_data": "data/strategy_comparison.csv",
+      "svg_path": "figures/13_energy_strategy.svg",
+      "units": "MJ"
+    },
+    {
+      "caption": "Distribution of optimum fixed-wing angle from 1,000 bounded uncertainty samples per circuit.",
+      "id": "14_uncertainty_optimum",
+      "path": "figures/14_uncertainty_optimum.png",
+      "source_data": "data/monte_carlo_samples.csv",
+      "svg_path": "figures/14_uncertainty_optimum.svg",
+      "units": "probability density"
+    },
+    {
+      "caption": "Lap-time sensitivity to \u00b110% input perturbations at the balanced-circuit optimum.",
+      "id": "15_sensitivity",
+      "path": "figures/15_sensitivity.png",
+      "source_data": "data/sensitivity.csv",
+      "svg_path": "figures/15_sensitivity.svg",
+      "units": "s"
+    },
+    {
+      "caption": "Circuit-by-circuit time gains from fixed-angle optimization and actuator-limited active aero.",
+      "id": "16_decision_matrix",
+      "path": "figures/16_decision_matrix.png",
+      "source_data": "data/decision_matrix.csv",
+      "svg_path": "figures/16_decision_matrix.svg",
+      "units": "s"
+    }
+  ],
+  "generated_at_utc": "2026-10-04T14:29:58.859901+00:00",
+  "headline_metrics": {
+    "active_limited_lap_time_s": {
+      "balanced": 59.35268334837606,
+      "high_downforce": 64.61487685106857,
+      "low_downforce": 68.59928318629619
+    },
+    "fixed_minimum_lap_time_s": {
+      "balanced": 58.81156033011679,
+      "high_downforce": 64.52767334999999,
+      "low_downforce": 68.15037518752371
+    },
+    "fixed_optimum_angle_deg": {
+      "balanced": 4.9967518512569,
+      "high_downforce": 18.0,
+      "low_downforce": 17.995743240460232
+    }
+  },
+  "input_sha256": {
+    "config/project.json": "0314bd3ebf113b6a2e77508a5057b929a22d8bc25a278853e0cd6cfbc81cf3f4",
+    "config/uncertainty.json": "c35205869602fb97009fdee9fd2d579e1ad8e69a4721d977097eeb747b85e501",
+    "tracks/balanced.json": "6d298f029be58ef7979b491ebeac27430b2ec50fb119b7a89297423170b43764",
+    "tracks/high_downforce.json": "2322c300b0402e509194d18358430f17d82fc0dcd03e0a37063d90501b85491e",
+    "tracks/low_downforce.json": "f34c91decd317cc0542cd1d20d5e6d78b75748da572123df59f485af9b947e5b"
+  },
+  "interpretation_warning": "This is a representative educational model; values are not proprietary F1 team data, wind-tunnel measurements, or full-car CFD results.",
+  "matlab_data": "data/F1_Wing_Angle_Results.mat",
+  "model_name": "Advanced F1 Rear-Wing Angle Study",
+  "model_version": "1.0.0",
+  "monte_carlo_samples_per_circuit": 1000,
+  "parity_fixture": "parity/reference_cases.csv",
+  "run_id": "6bf25b9bebcec26e",
+  "schema_version": "1.0",
+  "seed": 3106,
+  "tables": {
+    "active_optimization": {
+      "csv": "data/active_optimization.csv",
+      "xlsx_sheet": "active_optimization"
+    },
+    "aero_balance": {
+      "csv": "data/aero_balance.csv",
+      "xlsx_sheet": "aero_balance"
+    },
+    "aero_polar": {
+      "csv": "data/aero_polar.csv",
+      "xlsx_sheet": "aero_polar"
+    },
+    "circuit_optima": {
+      "csv": "data/circuit_optima.csv",
+      "xlsx_sheet": "circuit_optima"
+    },
+    "cornering": {
+      "csv": "data/cornering.csv",
+      "xlsx_sheet": "cornering"
+    },
+    "decision_matrix": {
+      "csv": "data/decision_matrix.csv",
+      "xlsx_sheet": "decision_matrix"
+    },
+    "force_speed": {
+      "csv": "data/force_speed.csv",
+      "xlsx_sheet": "force_speed"
+    },
+    "lap_sweeps": {
+      "csv": "data/lap_sweeps.csv",
+      "xlsx_sheet": "lap_sweeps"
+    },
+    "monte_carlo_correlations": {
+      "csv": "data/monte_carlo_correlations.csv",
+      "xlsx_sheet": "monte_carlo_correlations"
+    },
+    "monte_carlo_samples": {
+      "csv": "data/monte_carlo_samples.csv",
+      "xlsx_sheet": "monte_carlo_samples"
+    },
+    "monte_carlo_summary": {
+      "csv": "data/monte_carlo_summary.csv",
+      "xlsx_sheet": "monte_carlo_summary"
+    },
+    "parity_cases": {
+      "csv": "data/parity_cases.csv",
+      "xlsx_sheet": "parity_cases"
+    },
+    "sensitivity": {
+      "csv": "data/sensitivity.csv",
+      "xlsx_sheet": "sensitivity"
+    },
+    "speed_traces": {
+      "csv": "data/speed_traces.csv",
+      "xlsx_sheet": "speed_traces"
+    },
+    "straight_line": {
+      "csv": "data/straight_line.csv",
+      "xlsx_sheet": "straight_line"
+    },
+    "strategy_comparison": {
+      "csv": "data/strategy_comparison.csv",
+      "xlsx_sheet": "strategy_comparison"
+    }
+  },
+  "track_spacing_m": 5.0,
+  "workbook": "workbooks/F1_Wing_Angle_Results.xlsx"
+}

@@ -1,0 +1,4 @@
+track,optimum_angle_deg,minimum_lap_time_s,best_discrete_angle_deg,best_discrete_lap_time_s,neighbour_sensitivity_s_per_deg,optimization_method
+low_downforce,17.9957432405,68.1503751875,18,68.1503904847,0.042364260011,integer sweep + PCHIP bounded refinement
+balanced,4.99675185126,58.8115603301,5,58.8115714149,0.00309175864352,integer sweep + PCHIP bounded refinement
+high_downforce,18,64.52767335,18,64.52767335,0.0867269766408,integer sweep + PCHIP bounded refinement
