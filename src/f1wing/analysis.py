@@ -299,7 +299,12 @@ def monte_carlo(
     correlation_rows: list[dict[str, float | str]] = []
     for parameter in uncertainty.parameters:
         for metric in metrics:
-            correlation = spearmanr(output[parameter], output[metric]).statistic
+            parameter_values = output[parameter].to_numpy(dtype=float)
+            metric_values = output[metric].to_numpy(dtype=float)
+            if np.ptp(parameter_values) == 0.0 or np.ptp(metric_values) == 0.0:
+                correlation = 0.0
+            else:
+                correlation = spearmanr(parameter_values, metric_values).statistic
             correlation_rows.append(
                 {
                     "parameter": parameter,
