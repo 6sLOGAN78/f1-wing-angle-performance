@@ -1,0 +1,116 @@
+[
+  {
+    "id": 1,
+    "type": "regulation",
+    "authors": "Fédération Internationale de l’Automobile",
+    "year": 2026,
+    "title": "2026 Formula 1 Regulations, Section C: Technical, Issue 20",
+    "publisher": "FIA",
+    "url": "https://www.fia.com/system/files/documents/fia_2026_f1_regulations_-_section_c_technical_-_iss_20_-_2026-08-05.pdf",
+    "accessed": "2026-10-04"
+  },
+  {
+    "id": 2,
+    "type": "official-web",
+    "authors": "Fédération Internationale de l’Automobile",
+    "year": 2024,
+    "title": "A New Era of Competition: FIA showcases future-focused Formula 1 regulations for 2026 and beyond",
+    "publisher": "FIA",
+    "url": "https://www.fia.com/news/new-era-competition-fia-showcases-future-focused-formula-1-regulations-2026-and-beyond",
+    "accessed": "2026-10-04"
+  },
+  {
+    "id": 3,
+    "type": "official-web",
+    "authors": "NASA Glenn Research Center",
+    "year": 2024,
+    "title": "Lift Equation",
+    "publisher": "National Aeronautics and Space Administration",
+    "url": "https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/lift-equation/",
+    "accessed": "2026-10-04"
+  },
+  {
+    "id": 4,
+    "type": "official-web",
+    "authors": "NASA Glenn Research Center",
+    "year": 2024,
+    "title": "Induced Drag Coefficient",
+    "publisher": "National Aeronautics and Space Administration",
+    "url": "https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/induced-drag-coefficient/",
+    "accessed": "2026-10-04"
+  },
+  {
+    "id": 5,
+    "type": "technical-paper",
+    "authors": "Rodrigues, J. and de Souza Vieira, R.",
+    "year": 2012,
+    "title": "Evaluation of the Effects of Adding Front and Rear Wings on the Lap Times of a Formula SAE Car",
+    "publisher": "SAE International",
+    "doi": "10.4271/2012-36-0136",
+    "url": "https://saemobilus.sae.org/papers/evaluation-effects-adding-front-rear-wings-lap-times-a-formula-sae-car-2012-36-0136",
+    "accessed": "2026-10-04"
+  },
+  {
+    "id": 6,
+    "type": "journal-article",
+    "authors": "Santos, M. et al.",
+    "year": 2022,
+    "title": "Aerodynamic Study of a Drag Reduction System and Its Actuation System for a Formula Student Competition Car",
+    "publisher": "Fluids 7(9), 309",
+    "doi": "10.3390/fluids7090309",
+    "url": "https://www.mdpi.com/2311-5521/7/9/309",
+    "accessed": "2026-10-04"
+  },
+  {
+    "id": 7,
+    "type": "book",
+    "authors": "Katz, J.",
+    "year": 1995,
+    "title": "Race Car Aerodynamics: Designing for Speed",
+    "publisher": "Robert Bentley"
+  },
+  {
+    "id": 8,
+    "type": "book",
+    "authors": "Milliken, W. F. and Milliken, D. L.",
+    "year": 1995,
+    "title": "Race Car Vehicle Dynamics",
+    "publisher": "SAE International"
+  },
+  {
+    "id": 9,
+    "type": "book",
+    "authors": "Pacejka, H. B.",
+    "year": 2012,
+    "title": "Tire and Vehicle Dynamics, 3rd edition",
+    "publisher": "Butterworth-Heinemann"
+  },
+  {
+    "id": 10,
+    "type": "technical-paper",
+    "authors": "Brayshaw, D. L. and Harrison, M. F.",
+    "year": 2005,
+    "title": "A Quasi Steady State Approach to Race Car Lap Simulation in Order to Understand the Effects of Racing Line and Centre of Gravity Location",
+    "publisher": "Proceedings of the Institution of Mechanical Engineers, Part D",
+    "doi": "10.1243/095440705X11244"
+  },
+  {
+    "id": 11,
+    "type": "technical-paper",
+    "authors": "Siegler, B. P. et al.",
+    "year": 2000,
+    "title": "Lap Time Simulation: Comparison of Steady State, Quasi-static and Transient Racing Line Models",
+    "publisher": "SAE International",
+    "doi": "10.4271/2000-01-3563"
+  },
+  {
+    "id": 12,
+    "type": "software",
+    "authors": "The MathWorks, Inc.",
+    "year": 2022,
+    "title": "MATLAB and Simulink Release R2022b",
+    "publisher": "MathWorks",
+    "url": "https://www.mathworks.com/products/new_products/release2022b.html",
+    "accessed": "2026-10-04"
+  }
+]
