@@ -1,0 +1,93 @@
+{
+  "metadata": {
+    "name": "Advanced F1 Rear-Wing Angle Study",
+    "version": "1.0.0",
+    "parameter_classification": "representative educational model"
+  },
+  "environment": {
+    "air_density_kgpm3": 1.225,
+    "gravity_mps2": 9.80665
+  },
+  "vehicle": {
+    "mass_kg": 798.0,
+    "wheelbase_m": 3.6,
+    "cg_height_m": 0.31,
+    "front_static_fraction": 0.45,
+    "tyre_radius_m": 0.36,
+    "rolling_resistance_coefficient": 0.015
+  },
+  "aero": {
+    "reference_area_m2": 1.5,
+    "wing_area_m2": 0.72,
+    "wing_span_m": 1.0,
+    "span_efficiency": 0.78,
+    "lift_curve_slope_2d_per_rad": 6.1,
+    "zero_lift_angle_deg": -2.0,
+    "stall_angle_deg": 18.0,
+    "post_stall_width_deg": 7.0,
+    "wing_cd0": 0.055,
+    "stall_drag_gain": 0.55,
+    "baseline_cl": 2.4,
+    "baseline_cd": 0.78,
+    "baseline_front_downforce_fraction": 0.49,
+    "front_aero_application_from_front_m": 1.15,
+    "rear_aero_application_from_front_m": 3.25,
+    "nominal_ride_height_m": 0.045,
+    "ride_height_sensitivity_per_m": 2.0,
+    "yaw_sensitivity_per_deg2": 0.0007,
+    "minimum_multiplier": 0.7,
+    "maximum_multiplier": 1.15,
+    "minimum_angle_deg": 0.0,
+    "maximum_angle_deg": 30.0
+  },
+  "tyres": {
+    "mu_longitudinal_ref": 1.85,
+    "mu_lateral_ref": 1.95,
+    "reference_load_n": 3915.0,
+    "load_sensitivity_exponent": 0.08,
+    "friction_ellipse_exponent": 2.0,
+    "max_brake_force_n": 30000.0
+  },
+  "powertrain": {
+    "rpm_points": [5000, 8000, 11000, 13000, 15000],
+    "torque_nm": [480, 590, 610, 570, 500],
+    "gear_ratios": [3.2, 2.45, 1.95, 1.6, 1.36, 1.19, 1.06, 0.96],
+    "final_drive_ratio": 3.15,
+    "driveline_efficiency": 0.94,
+    "idle_rpm": 5000.0,
+    "redline_rpm": 15000.0,
+    "driven_rear_fraction": 1.0
+  },
+  "solver": {
+    "track_spacing_m": 5.0,
+    "speed_tolerance_mps": 0.001,
+    "force_tolerance_n": 5.0,
+    "max_iterations": 200,
+    "minimum_speed_mps": 1.0,
+    "maximum_speed_mps": 110.0
+  },
+  "strategy": {
+    "open_angle_deg": 2.0,
+    "corner_angle_deg": 20.0,
+    "activation_delay_s": 0.2,
+    "deactivation_delay_s": 0.1,
+    "max_actuator_rate_degps": 90.0,
+    "activation_speed_mps": 55.0,
+    "deactivation_long_accel_mps2": -1.0
+  },
+  "parameter_register": {
+    "vehicle.mass_kg": {"unit": "kg", "classification": "reference-informed", "description": "Representative car-plus-driver mass used throughout the comparison.", "supported_range": [740, 900]},
+    "vehicle.wheelbase_m": {"unit": "m", "classification": "assumed", "description": "Representative wheelbase for load transfer and aero application geometry.", "supported_range": [3.2, 3.8]},
+    "vehicle.cg_height_m": {"unit": "m", "classification": "assumed", "description": "Centre-of-gravity height used for longitudinal load transfer.", "supported_range": [0.25, 0.4]},
+    "vehicle.front_static_fraction": {"unit": "fraction", "classification": "assumed", "description": "Static normal-load fraction carried by the front axle.", "supported_range": [0.42, 0.5]},
+    "aero.reference_area_m2": {"unit": "m^2", "classification": "assumed", "description": "Common force-coefficient reference area for the complete car.", "supported_range": [1.2, 1.8]},
+    "aero.wing_area_m2": {"unit": "m^2", "classification": "derived", "description": "Planform reference area of the simplified rear wing.", "supported_range": [0.5, 0.9]},
+    "aero.stall_angle_deg": {"unit": "deg", "classification": "assumed", "description": "Effective angle at the onset of the smooth post-stall model.", "supported_range": [15, 22]},
+    "aero.baseline_cl": {"unit": "dimensionless", "classification": "assumed", "description": "Non-rear-wing full-car downforce coefficient magnitude.", "supported_range": [1.5, 3.5]},
+    "aero.baseline_cd": {"unit": "dimensionless", "classification": "assumed", "description": "Non-rear-wing full-car drag coefficient.", "supported_range": [0.6, 1.1]},
+    "tyres.mu_lateral_ref": {"unit": "dimensionless", "classification": "assumed", "description": "Reference lateral friction coefficient before load sensitivity.", "supported_range": [1.5, 2.2]},
+    "powertrain.torque_nm": {"unit": "N m", "classification": "assumed", "description": "Representative engine torque curve used for comparative simulations.", "supported_range": [450, 650]},
+    "solver.track_spacing_m": {"unit": "m", "classification": "derived", "description": "Maximum spatial step for circuit discretization.", "supported_range": [1, 5]}
+  }
+}
+

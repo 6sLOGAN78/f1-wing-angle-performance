@@ -1,0 +1,18 @@
+{
+  "name": "Balanced Circuit",
+  "description": "Synthetic 5.40 km circuit mixing four straights with low-, medium-, and high-speed corners.",
+  "closed": true,
+  "segments": [
+    {"length_m": 760, "curvature_start_1pm": 0.0, "curvature_end_1pm": 0.0, "gradient_percent": 0.2, "aero_eligible": true, "speed_limit_kph": null},
+    {"length_m": 420, "curvature_start_1pm": 0.0040, "curvature_end_1pm": 0.0040, "gradient_percent": 0.6, "aero_eligible": false, "speed_limit_kph": null},
+    {"length_m": 610, "curvature_start_1pm": 0.0, "curvature_end_1pm": 0.0, "gradient_percent": -0.5, "aero_eligible": true, "speed_limit_kph": null},
+    {"length_m": 280, "curvature_start_1pm": -0.0100, "curvature_end_1pm": -0.0100, "gradient_percent": -0.2, "aero_eligible": false, "speed_limit_kph": null},
+    {"length_m": 540, "curvature_start_1pm": 0.0030, "curvature_end_1pm": 0.0055, "gradient_percent": 0.4, "aero_eligible": false, "speed_limit_kph": null},
+    {"length_m": 830, "curvature_start_1pm": 0.0, "curvature_end_1pm": 0.0, "gradient_percent": -0.1, "aero_eligible": true, "speed_limit_kph": null},
+    {"length_m": 360, "curvature_start_1pm": -0.0060, "curvature_end_1pm": -0.0060, "gradient_percent": -0.4, "aero_eligible": false, "speed_limit_kph": null},
+    {"length_m": 500, "curvature_start_1pm": 0.0045, "curvature_end_1pm": 0.0020, "gradient_percent": 0.3, "aero_eligible": false, "speed_limit_kph": null},
+    {"length_m": 700, "curvature_start_1pm": 0.0, "curvature_end_1pm": 0.0, "gradient_percent": 0.0, "aero_eligible": true, "speed_limit_kph": null},
+    {"length_m": 400, "curvature_start_1pm": -0.0070, "curvature_end_1pm": -0.0030, "gradient_percent": -0.2, "aero_eligible": false, "speed_limit_kph": null}
+  ]
+}
+

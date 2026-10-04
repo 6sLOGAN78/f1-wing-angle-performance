@@ -1,0 +1,16 @@
+{
+  "seed": 3106,
+  "samples": 1000,
+  "parameters": {
+    "environment.air_density_kgpm3": {"distribution": "uniform", "minimum": 1.12, "maximum": 1.28},
+    "environment.headwind_mps": {"distribution": "uniform", "minimum": -4.0, "maximum": 4.0},
+    "tyres.mu_lateral_ref": {"distribution": "uniform", "minimum": 1.75, "maximum": 2.1},
+    "tyres.mu_longitudinal_ref": {"distribution": "uniform", "minimum": 1.65, "maximum": 2.0},
+    "powertrain.power_scale": {"distribution": "uniform", "minimum": 0.95, "maximum": 1.05},
+    "aero.lift_curve_slope_scale": {"distribution": "uniform", "minimum": 0.9, "maximum": 1.1},
+    "aero.wing_cd0": {"distribution": "uniform", "minimum": 0.045, "maximum": 0.07},
+    "aero.stall_angle_deg": {"distribution": "uniform", "minimum": 16.0, "maximum": 21.0},
+    "aero.baseline_cl": {"distribution": "uniform", "minimum": 2.15, "maximum": 2.65}
+  }
+}
+
