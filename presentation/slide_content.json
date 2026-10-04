@@ -57,7 +57,7 @@
       "key_stats": {
         "Sweep Bounds": "0.0° – 30.0°",
         "Discretization": "≤ 5.0 m spacing",
-        "Strategies": "Fixed, Open-Wing, Active (25°/s)"
+        "Strategies": "Fixed, Open-Wing, Active (90°/s)"
       }
     },
     {
@@ -268,10 +268,10 @@
         "Fixed-Angle Baseline: Compromised between cornering downforce and straight-line speed; cannot adapt dynamically.",
         "Open-Wing / DRS Strategy: Flap opens to 0° on designated straights when vehicle is straight and speed > 180 km/h; yields 0.45 s to 1.15 s improvement.",
         "Ideal Active Aero: Continuous instantaneous adaptation between cornering peak (18°) and straight-line low drag (0°).",
-        "Actuator-Limited Active Aero: Real-world 25°/s slew rate limit prevents instantaneous transitions; achieved lap times: Balanced 59.353 s, Low-DF 68.599 s, High-DF 64.615 s."
+        "Actuator-Limited Active Aero: Real-world 90°/s slew rate limit prevents instantaneous transitions; achieved lap times: Balanced 59.353 s, Low-DF 68.599 s, High-DF 64.615 s."
       ],
       "key_stats": {
-        "Actuator Rate Limit": "25.0 °/s",
+        "Actuator Rate Limit": "90.0 °/s",
         "Balanced Active Time": "59.353 s",
         "High-DF Active Time": "64.615 s",
         "Low-DF Active Time": "68.599 s"
@@ -324,7 +324,7 @@
       "bullet_points": [
         "Circuit-Specific Optimality: No single wing angle is universally optimal; balanced circuits favor moderate angles (5.00°), while high-downforce circuits demand stall-limit trim (18.00°).",
         "Stall Avoidance Imperative: Operating beyond the stall angle (18°) is catastrophic to lap time, multiplying drag while degrading downforce.",
-        "Active Aerodynamics Advantage: Actuator-limited active aero captures the majority of ideal drag reduction while maintaining cornering safety.",
+        "Active Aero Control Lesson: Ideal active aero improves lap time by up to -0.54 s, but finite 90°/s slew rates and transition delays incur penalties (+0.09s to +0.54s) under naive threshold switching.",
         "Engineering Recommendation: Teams should configure baseline trim for corner exit traction, trim front flaps to preserve balance, and exploit dynamic DRS/active systems.",
         "Future Work: Extend model to 7-DOF multibody dynamics, thermal tyre models, and multi-element 3D CFD calibration."
       ],
@@ -332,7 +332,7 @@
         "Balanced Optimum": "5.00°",
         "High-DF Optimum": "18.00°",
         "Max Lap Gain": "Up to 3.8 s vs 0°",
-        "Active Aero Gain": "Significant on high-speed straights"
+        "Active Aero Trade-off": "Ideal -0.54s / Limited +0.09s to +0.54s"
       }
     },
     {

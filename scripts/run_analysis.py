@@ -6,7 +6,9 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 import shutil
+import sys
 
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 from f1wing.exports import export_result_bundle, run_full_analysis
 
 

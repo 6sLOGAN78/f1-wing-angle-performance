@@ -25,7 +25,7 @@ Across an angle sweep from 0° to 30° at 1° resolution, vehicle performance wa
 1. **Efficiency vs. Maximum Downforce Disconnect:** Peak aerodynamic efficiency ($L/D \approx 3.42$) occurs at **6.0°**, whereas peak total vehicle downforce ($18.38\text{ kN}$ at $300\text{ km/h}$) peaks at the stall boundary (**18.0°**).
 2. **Terminal Velocity Penalty:** Terminal velocity drops monotonically from **348.6 km/h** at 0° to **304.5 km/h** at 18° and **278.4 km/h** at 30° (a 70.2 km/h deficit across the sweep).
 3. **Catastrophic Post-Stall Drag:** Increasing wing angle past the 18° stall boundary produces continuous flow separation, escalating drag by up to +185% without delivering additional vertical load, resulting in severe lap time degradation across all circuit types.
-4. **Active Aerodynamics Advantage:** An actuator rate-limited (25°/s) active rear wing schedule captures the low-drag advantages on high-speed straights while preserving maximum downforce in braking and cornering zones.
+4. **Actuator Latency & Active Aero Trade-off:** While idealized instantaneous active aero provides lap-time gains (up to -0.544 s on the low-downforce circuit), an actuator rate-limited (90°/s) schedule with transition delays incurs net lap-time penalties (+0.087 s to +0.541 s slower than fixed-optimum) under simple threshold switching, showing that predictive control is required.
 
 ---
 
@@ -164,10 +164,10 @@ modelPath = build_simulink_demo(); % Programmatically construct F1WingAeroDemo.s
 
 ### Simulink Demonstration Architecture
 `build_simulink_demo.m` constructs `results/simulink/F1WingAeroDemo.slx` programmatically:
-- Dynamic wing angle command input with configurable **Rate Limiter** block (25°/s).
+- Dynamic wing angle command input with configurable **Rate Limiter** block (90°/s).
 - Core **MATLAB Function** block executing nonlinear lift/drag/stall equations.
 - Dynamic pressure multiplier ($q = \frac{1}{2} \rho V^2$) and longitudinal force summation.
-- Continuous 1-DOF vehicle longitudinal speed integrator ($m \cdot \dot{V} = F_{\text{traction}} - F_{\text{drag}} - F_{\text{rr}}$).
+- Continuous 1-DOF vehicle longitudinal speed integrator ($m \cdot \dot{V} = F_{\text{traction}} - F_{\text{drag}}$).
 - Logged output scopes for vehicle speed, downforce, drag, and wing angle.
 
 *Notice: MATLAB and Simulink are not installed in the authoring environment, so these `.m` files are statically checked but **not runtime-tested** here. Full runtime parity execution should be performed in a licensed MATLAB R2022b+ environment using `run_parity_tests` to validate against `results/parity/reference_cases.csv`.*
