@@ -1,0 +1,348 @@
+{
+  "project_title": "Simulation and Analysis of the Effect of Rear-Wing Angle on F1 Car Performance",
+  "project_subtitle": "Corrected nominal physics | Circuit-dependent optimization | Active aero",
+  "slides": [
+    {
+      "index": 1,
+      "layout": "title_slide",
+      "title": "Effect of Rear-Wing Angle on F1 Car Performance",
+      "category": "PROJECT OVERVIEW",
+      "bullet_points": [
+        "An analytical simulation of a representative Formula 1-style vehicle.",
+        "Rear-wing sweep: 0–30° on three synthetic circuit archetypes.",
+        "Corrected force-feasible lap solver and full-bound active-aero search.",
+        "Verified numerical results; not CFD, measured telemetry, or a team setup."
+      ],
+      "key_stats": {
+        "Course": "ME3106",
+        "Model": "Representative educational car",
+        "Geometry": "Three synthetic tracks",
+        "Evidence": "Corrected numerical audits"
+      },
+      "speaker_notes": "Introduce the project as a comparative engineering experiment, not an exact F1 digital twin. The central question is whether added downforce compensates for drag over a complete lap."
+    },
+    {
+      "index": 2,
+      "layout": "two_column",
+      "title": "Research Question and Objectives",
+      "category": "RESEARCH QUESTION",
+      "bullet_points": [
+        "How does rear-wing incidence affect aerodynamic forces and minimum lap time?",
+        "Quantify the trade-off between straight-line resistance and cornering grip.",
+        "Compare low-downforce, balanced, and high-downforce circuit geometries.",
+        "Compare a fixed wing with ideal and actuator-limited two-state strategies."
+      ],
+      "key_stats": {
+        "Independent variable": "Rear-wing angle",
+        "Main objective": "Minimum feasible lap time",
+        "Secondary outputs": "Speed and tractive energy",
+        "Comparison": "Same car; different tracks"
+      },
+      "speaker_notes": "Explain that a wing with maximum lift-to-drag ratio is not necessarily the fastest setup. All comparisons use identical vehicle inputs and track meshes."
+    },
+    {
+      "index": 3,
+      "layout": "two_column",
+      "title": "Study Scope and Modeling Assumptions",
+      "category": "ASSUMPTIONS",
+      "bullet_points": [
+        "Quasi-steady point-mass motion with front/rear axle load resolution.",
+        "Analytical rear-wing polar combined with a fixed baseline full-car map.",
+        "Load-sensitive tyres, combined grip, longitudinal load transfer, torque and gearing.",
+        "No tyre-temperature dynamics, suspension transients, driver telemetry, or CFD."
+      ],
+      "key_stats": {
+        "Model scale": "Full-car forces",
+        "Track spacing": "No more than 5 m",
+        "Vehicle mass": "798 kg",
+        "Wheelbase": "3.60 m"
+      },
+      "speaker_notes": "State the scope before discussing results. Axle forces are resolved, but yaw handling and transient suspension behavior are not modeled. Circuit labels describe synthetic geometry, not real venues."
+    },
+    {
+      "index": 4,
+      "layout": "text_and_figure",
+      "title": "Aerodynamic Model: Lift, Drag and Stall",
+      "category": "AERODYNAMICS",
+      "bullet_points": [
+        "Finite-wing slope: a = a0 / [1 + a0 / (pi e AR)].",
+        "Wing drag includes profile, induced and assumed post-stall terms.",
+        "Pre-stall lift rises linearly; post-stall lift decays exponentially.",
+        "The join is continuous, but its slope can kink at the assumed stall angle."
+      ],
+      "key_stats": {
+        "Angle bounds": "0–30°",
+        "Assumed stall": "18°",
+        "Aspect ratio": "Span squared / wing area"
+      },
+      "figure": "figures/polar.png",
+      "figure_caption": "Corrected model output; representative educational vehicle.",
+      "speaker_notes": "Explain why finite span reduces the ideal two-dimensional lift slope. The stall angle is an assumed model parameter, not an experimentally measured property of a real F1 wing."
+    },
+    {
+      "index": 5,
+      "layout": "text_and_figure",
+      "title": "Speed-Dependent Downforce and Drag",
+      "category": "AERODYNAMIC FORCES",
+      "bullet_points": [
+        "Dynamic pressure: q = 0.5 rho V_air squared.",
+        "Downforce = q A CL,total; drag = q A CD,total.",
+        "Relative air speed matters when wind is present.",
+        "Added rear-wing force changes axle loading and the available tyre grip."
+      ],
+      "key_stats": {
+        "Air density": "1.225 kg/m3 nominal",
+        "Reference area": "1.50 m2",
+        "Comparison angles": "0°, 9°, 18°, 30°"
+      },
+      "figure": "figures/forces.png",
+      "figure_caption": "Corrected model output; representative educational vehicle.",
+      "speaker_notes": "Show that force rises with air speed squared for unchanged coefficients. Distinguish the wing coefficients from the area-scaled full-car coefficients. Downforce is positive downward in this project."
+    },
+    {
+      "index": 6,
+      "layout": "two_column",
+      "title": "Tyre Grip and Longitudinal Load Transfer",
+      "category": "VEHICLE DYNAMICS",
+      "bullet_points": [
+        "Load sensitivity: mu = mu_ref (Fz / Fz_ref)^(-n).",
+        "Combined demand: (Fx/Fx,max)^p + (Fy/Fy,max)^p <= 1.",
+        "Lateral demand is normalized by lateral friction, not longitudinal friction.",
+        "Actual acceleration shifts axle normal loads and alters traction/braking capacity."
+      ],
+      "key_stats": {
+        "Tyre exponent n": "0.08",
+        "Ellipse exponent p": "2",
+        "Nominal mu_x / mu_y": "1.85 / 1.95",
+        "Load resolution": "Front and rear axles"
+      },
+      "speaker_notes": "Describe the corrected friction-ellipse normalization. An axle already using most lateral grip cannot independently provide its full longitudinal force. Load transfer must use the achieved acceleration."
+    },
+    {
+      "index": 7,
+      "layout": "two_column",
+      "title": "Powertrain and Force Balance",
+      "category": "LONGITUDINAL PERFORMANCE",
+      "bullet_points": [
+        "Available wheel thrust follows the interpolated engine torque curve and eight gears.",
+        "Resistance combines aerodynamic drag, rolling resistance and track gradient.",
+        "Each segment must satisfy thrust - brake - resistance = mass x acceleration.",
+        "Constant-speed cornering must reserve enough longitudinal grip to overcome drag."
+      ],
+      "key_stats": {
+        "Gear count": "8",
+        "Driveline efficiency": "0.94",
+        "Redline": "15,000 rpm",
+        "Energy metric": "Positive wheel tractive work"
+      },
+      "speaker_notes": "Explain the main physics correction: a purely lateral speed limit can permit unsustainable speed if no tyre force remains to overcome drag. The corrected solver rejects that state. No battery or hybrid deployment is modeled."
+    },
+    {
+      "index": 8,
+      "layout": "two_column",
+      "title": "Closed-Track Lap Simulation Workflow",
+      "category": "SIMULATION METHOD",
+      "bullet_points": [
+        "Load validated car configuration and discretize the track at <=5 m.",
+        "Construct a sustainable local speed envelope for the commanded wing profile.",
+        "Apply forward acceleration and backward braking passes until convergence.",
+        "Include the closing segment, then check achieved acceleration and force closure."
+      ],
+      "key_stats": {
+        "Speed convergence": "<=0.001 m/s",
+        "Iteration ceiling": "200",
+        "Force feasibility guard": ">= -5 N",
+        "Force closure guard": "<=0.000001 N"
+      },
+      "speaker_notes": "Walk through the distance-domain solver. The start/finish cell is part of the physics, not a special unchecked edge. Numerical guards establish feasibility within the model, not experimental accuracy."
+    },
+    {
+      "index": 9,
+      "layout": "text_and_figure",
+      "title": "Fixed-Wing Sweep Across Three Circuits",
+      "category": "CORRECTED RESULTS",
+      "bullet_points": [
+        "93 physical laps: 31 integer angles x three synthetic circuits.",
+        "Every case checked for convergence, force feasibility and closed-segment integration.",
+        "All angle cases retain the original 5 m track discretization.",
+        "The best wing setting depends on this car model and the circuit geometry."
+      ],
+      "key_stats": {
+        "Grid cases": "93 / 93 checked",
+        "Wing sweep": "0°, 1°, ... 30°",
+        "Track types": "Low-DF / Balanced / High-DF"
+      },
+      "figure": "figures/fixed_laps.png",
+      "figure_caption": "Corrected model output; representative educational vehicle.",
+      "speaker_notes": "Use the fresh fixed-lap sweep plot, not the legacy result bundle. Discuss how curve minima differ across circuits. Do not rename the synthetic circuits as real tracks."
+    },
+    {
+      "index": 10,
+      "layout": "text_and_figure",
+      "title": "Continuously Refined Fixed-Wing Optima",
+      "category": "FIXED OPTIMIZATION",
+      "bullet_points": [
+        "Physical lap solves refine candidate basins around the integer sweep.",
+        "Bounds and neighboring integer points remain part of the search.",
+        "Balanced-track optimum is near 2.819°; the other two are near 18°.",
+        "These are nominal model optima, not uncertainty confidence intervals."
+      ],
+      "key_stats": {},
+      "figure": "figures/fixed_laps.png",
+      "figure_caption": "Corrected model output; representative educational vehicle.",
+      "speaker_notes": "Report the refined optima to three decimals, then explain that more digits do not imply experimentally calibrated accuracy. The high-downforce optimum falls at the assumed stall angle.",
+      "headline_group": "fixed"
+    },
+    {
+      "index": 11,
+      "layout": "text_and_figure",
+      "title": "Speed and Energy: Secondary Performance Metrics",
+      "category": "FIXED-WING DIAGNOSTICS",
+      "bullet_points": [
+        "Record maximum speed and positive tractive wheel work for every fixed lap.",
+        "Energy is integrated from achieved tractive force over distance.",
+        "Minimum lap time and minimum tractive energy are different objectives.",
+        "Wheel tractive work is not fuel consumption or battery-energy demand."
+      ],
+      "key_stats": {
+        "Source": "Fresh 93-case fixed audit",
+        "Energy unit": "MJ per modeled lap",
+        "Speed unit": "km/h"
+      },
+      "figure": "figures/energy.png",
+      "figure_caption": "Corrected model output; representative educational vehicle.",
+      "speaker_notes": "Explain what the energy metric means. Avoid interpreting a tractive-work difference as a fuel-saving percentage; engine efficiency and hybrid energy flows are outside scope."
+    },
+    {
+      "index": 12,
+      "layout": "two_column",
+      "title": "Two-State Active Aerodynamics",
+      "category": "CONTROL STRATEGY",
+      "bullet_points": [
+        "Use an open, lower-angle state on eligible straight sections.",
+        "Use a closed, higher-angle state under the modeled switching conditions.",
+        "Search every unique integer pair within 0–30°, with >=1° separation.",
+        "Compare ideal state changes against finite-rate, delayed actuator behavior."
+      ],
+      "key_stats": {
+        "Pairs per search": "465",
+        "Actuator limit": "90°/s",
+        "Activation delay": "0.2 s",
+        "Deactivation delay": "0.1 s"
+      },
+      "speaker_notes": "The active strategy is an educational control policy, not an exact FIA implementation. The ideal mode is a model comparison; the limited mode includes actuator timing. Grid-resolved optimality is not continuous-global optimality."
+    },
+    {
+      "index": 13,
+      "layout": "text_and_figure",
+      "title": "Fixed Versus Ideal and Limited Active Aero",
+      "category": "ACTIVE-AERO RESULTS",
+      "bullet_points": [
+        "Compare optimized strategies using the same car and original track meshes.",
+        "Active search evaluates actual physical laps, not a coarsened surrogate.",
+        "All completed cases must satisfy force, convergence and actuator checks.",
+        "Interpret small differences relative to model assumptions and numerical resolution."
+      ],
+      "key_stats": {},
+      "figure": "figures/strategies.png",
+      "figure_caption": "Corrected model output; representative educational vehicle.",
+      "speaker_notes": "Read the corrected three-strategy comparison. Report the gain in seconds from the fixed optimum to the limited strategy. These nominal gains are not guaranteed real-world performance improvements.",
+      "headline_group": "active"
+    },
+    {
+      "index": 14,
+      "layout": "two_column",
+      "title": "Validation and Reproducibility Evidence",
+      "category": "NUMERICAL AUDIT",
+      "bullet_points": [
+        "Fixed sweep: 93 checked laps, including force, time and energy closure.",
+        "Active searches: 465 unique pairs per circuit and actuator mode.",
+        "Scalar force checks include the track closing segment and achieved acceleration.",
+        "Source hashes, input hashes, runtime versions and completion receipts preserve identity."
+      ],
+      "key_stats": {
+        "Active scope": "3 circuits x 2 modes",
+        "Active cases": "2,790 total",
+        "Audit type": "Numerical feasibility",
+        "Empirical validation": "Not performed"
+      },
+      "speaker_notes": "Distinguish the six active grids: the balanced ideal grid completed earlier, while the five monitored grids contribute 2,325 cases. Passing these guards does not make the whole software suite or native implementation complete."
+    },
+    {
+      "index": 15,
+      "layout": "two_column",
+      "title": "MATLAB and Simulink Implementation",
+      "category": "NATIVE TOOLCHAIN",
+      "bullet_points": [
+        "MATLAB source includes configuration, aero, dynamics and fixed-wing lap analysis.",
+        "Simulink model/builder is supplied for a speed-dependent aero/actuator demonstration.",
+        "The aero block chain is: speed and angle -> coefficients -> forces -> scopes.",
+        "Full native active/uncertainty/sensitivity execution and strict runtime parity remain unverified."
+      ],
+      "key_stats": {
+        "MATLAB entry point": "matlab/run_project.m",
+        "Parity tolerance": "1e-4 required",
+        "Simulink scope": "Aero/actuator demonstration",
+        "Runtime status": "Full native validation pending"
+      },
+      "speaker_notes": "Show the actual source/model files if demonstrating the project. Do not say all results were produced by MATLAB: the corrected numerical evidence here comes from Python. MATLAB startup failed in this environment, and full native scope is incomplete."
+    },
+    {
+      "index": 16,
+      "layout": "two_column",
+      "title": "Uncertainty and Sensitivity: What Remains",
+      "category": "RESEARCH LIMITATIONS",
+      "bullet_points": [
+        "A validated >=1,000-sample, nine-parameter uncertainty study is still required.",
+        "The tested uncertainty surrogate failed independent validation and was rejected.",
+        "Direct full-physics Monte Carlo is selected, but not yet implemented or executed.",
+        "No confidence intervals or sensitivity rankings are claimed in this presentation."
+      ],
+      "key_stats": {
+        "Planned random seed": "3106",
+        "Planned samples": ">=1,000 per circuit",
+        "Accepted uncertainty": "None yet",
+        "Legacy MC figures": "Excluded"
+      },
+      "speaker_notes": "Be direct: uncertainty results are unfinished. Explain the planned sample-angle physical simulations, but do not present the proposal as completed work. This transparency is stronger than displaying invalid confidence intervals."
+    },
+    {
+      "index": 17,
+      "layout": "two_column",
+      "title": "Main Findings and Engineering Interpretation",
+      "category": "CONCLUSIONS",
+      "bullet_points": [
+        "There is no universal wing angle: optimize for the complete circuit, not one aerodynamic metric.",
+        "Correct force balance changes the accepted lap speeds, optima and strategy comparisons.",
+        "Two-state active aero provides a nominal model benefit when feasible switching is allowed.",
+        "Final empirical calibration, native parity and validated uncertainty are necessary next steps."
+      ],
+      "key_stats": {
+        "Nominal fixed optimum": "Circuit dependent",
+        "Control takeaway": "Respect actuator limits",
+        "Model takeaway": "Reserve grip for resistance",
+        "Claim boundary": "Educational simulation"
+      },
+      "speaker_notes": "Conclude with the engineering trade-off and the corrected feasibility requirement. Explain that the deliverable is a defensible presentation of verified nominal results, not a declaration that every original project requirement is satisfied."
+    },
+    {
+      "index": 18,
+      "layout": "two_column",
+      "title": "Evidence, Source Files and Questions",
+      "category": "REFERENCES & HANDOFF",
+      "bullet_points": [
+        "Inputs: config/project.json and tracks/*.json define assumptions and geometry.",
+        "Physics: src/f1wing/aero.py, dynamics.py, lap.py and strategies.py.",
+        "Corrected results: docs/verification/*-20261005.csv and matching JSON audit receipts.",
+        "Native files: matlab/ and results/simulink/; incomplete runtime scope is disclosed."
+      ],
+      "key_stats": {
+        "Presentation": "Editable PowerPoint + PDF",
+        "Speaker support": "Notes and slide-by-slide guide",
+        "Numerical source": "Corrected audit receipts",
+        "Questions": "Model, methods, trade-offs"
+      },
+      "speaker_notes": "Invite questions about the equations, numerical guards, optimization and limits. If asked about a real F1 setup or robust optimum, say that calibrated aerodynamic/tyre data and validated uncertainty are still needed."
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "run_id": "9b1c3a7968173ace",
+  "identity_scope": "Presentation assembly from six independently identified numerical audits; not a new complete-project simulation run",
+  "model_version": "1.0.0",
+  "seed": 3106,
+  "headline_metrics": {
+    "fixed_optimum_angle_deg": {
+      "low_downforce": 17.751585166291928,
+      "balanced": 2.818551547058492,
+      "high_downforce": 18.0
+    },
+    "fixed_minimum_lap_time_s": {
+      "low_downforce": 68.9273103902251,
+      "balanced": 59.129880129968456,
+      "high_downforce": 64.4175388420192
+    },
+    "active_limited_lap_time_s": {
+      "low_downforce": 67.9137415871065,
+      "balanced": 59.05295626826505,
+      "high_downforce": 64.18431838627845
+    }
+  },
+  "monte_carlo_samples_per_circuit": 0,
+  "interpretation_warning": "Educational nominal model. Uncertainty and complete native parity remain unfinished.",
+  "audit_sources": [
+    "docs/verification/active-low-downforce-ideal-audit-20261005.json",
+    "docs/verification/active-low-downforce-limited-audit-20261005.json",
+    "docs/verification/active-balanced-ideal-audit-20261005.json",
+    "docs/verification/active-balanced-limited-audit-20261005.json",
+    "docs/verification/active-high-downforce-ideal-audit-20261005.json",
+    "docs/verification/active-high-downforce-limited-audit-20261005.json"
+  ]
+}

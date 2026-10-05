@@ -1,0 +1,11 @@
+{
+  "slide_count": 18,
+  "pdf_pages": 18,
+  "notes_count": 18,
+  "all_headlines_in_pdf": true,
+  "safe_shape_bounds": true,
+  "legacy_figures_used": false,
+  "pptx_sha256": "77735f3fb093771181d68d03ec1946ab8b5271724e80a6ad6e0ef93d123c6408",
+  "pdf_sha256": "836534bf64da5c22bcfa5add4316ce12ae3fc8701a3d5a4c7f123d0717a80f91",
+  "scope_warning": "Educational nominal model. Uncertainty and complete native parity remain unfinished."
+}
